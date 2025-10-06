@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: paperpilot-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ELSEVIER_API_KEY
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: true
+    plan: starter
