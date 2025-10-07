@@ -61,7 +61,7 @@ python-dateutil==2.8.2
 
 # Text processing
 nltk==3.8.1
-spacy==3.7.2
+# spaCy removed to avoid blis build issues - not used in current codebase
 
 # LaTeX processing
 pylatex==1.4.2
