@@ -62,7 +62,7 @@ class EmailService {
       const mailOptions = {
         from: {
           name: 'PaperPilot',
-          address: process.env.SMTP_USER
+          address: process.env.SMTP_USER || 'demo@paperpilot.com'
         },
         to: email,
         subject: emailTemplates.verification.subject,
@@ -96,7 +96,7 @@ class EmailService {
       const mailOptions = {
         from: {
           name: 'PaperPilot',
-          address: process.env.SMTP_USER
+          address: process.env.SMTP_USER || 'demo@paperpilot.com'
         },
         to: email,
         subject: emailTemplates.passwordReset.subject,
@@ -127,7 +127,7 @@ class EmailService {
       const mailOptions = {
         from: {
           name: 'PaperPilot',
-          address: process.env.SMTP_USER
+          address: process.env.SMTP_USER || 'demo@paperpilot.com'
         },
         to: email,
         subject: emailTemplates.welcome.subject,

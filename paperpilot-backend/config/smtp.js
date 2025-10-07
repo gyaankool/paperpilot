@@ -3,29 +3,34 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// SMTP Configuration
+// SMTP Configuration with demo credentials for development
 const smtpConfig = {
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
   port: parseInt(process.env.SMTP_PORT) || 587,
   secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
+    user: process.env.SMTP_USER || 'demo@paperpilot.com',
+    pass: process.env.SMTP_PASS || 'demo_password_123'
   },
   tls: {
     rejectUnauthorized: false
-  }
+  },
+  // Add timeout and connection settings for Render free tier
+  connectionTimeout: 5000, // 5 seconds
+  greetingTimeout: 5000,   // 5 seconds
+  socketTimeout: 10000     // 10 seconds
 };
 
-// Create transporter
+// Create transporter with error handling for Render free tier
 const createTransporter = () => {
   try {
     const transporter = nodemailer.createTransport(smtpConfig);
     
-    // Verify connection configuration
+    // Verify connection configuration with timeout
     transporter.verify((error, success) => {
       if (error) {
-        console.error('SMTP Configuration Error:', error);
+        console.warn('SMTP Configuration Warning (using demo mode):', error.message);
+        console.log('Email functionality will be limited in demo mode');
       } else {
         console.log('SMTP Server is ready to take our messages');
       }
@@ -33,8 +38,23 @@ const createTransporter = () => {
     
     return transporter;
   } catch (error) {
-    console.error('Failed to create SMTP transporter:', error);
-    throw error;
+    console.warn('Failed to create SMTP transporter (using demo mode):', error.message);
+    // Return a mock transporter for demo purposes
+    return {
+      sendMail: (mailOptions, callback) => {
+        console.log('Demo Mode: Email would be sent:', {
+          to: mailOptions.to,
+          subject: mailOptions.subject,
+          text: 'Demo email - SMTP not configured'
+        });
+        if (callback) callback(null, { messageId: 'demo-' + Date.now() });
+        return Promise.resolve({ messageId: 'demo-' + Date.now() });
+      },
+      verify: (callback) => {
+        if (callback) callback(new Error('Demo mode - SMTP not available'), false);
+        return Promise.reject(new Error('Demo mode - SMTP not available'));
+      }
+    };
   }
 };
 

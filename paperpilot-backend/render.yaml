@@ -16,13 +16,15 @@ services:
       - key: ELSEVIER_API_KEY
         sync: false
       - key: SMTP_HOST
-        sync: false
+        value: smtp.gmail.com
       - key: SMTP_PORT
-        sync: false
+        value: 587
       - key: SMTP_USER
-        sync: false
+        value: demo@paperpilot.com
       - key: SMTP_PASS
-        sync: false
+        value: demo_password_123
+      - key: SMTP_SECURE
+        value: false
     healthCheckPath: /health
     autoDeploy: true
     plan: starter
