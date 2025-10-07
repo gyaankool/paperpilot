@@ -103,6 +103,8 @@ results/
 *.xlsx
 *.xls
 
+!requirements.txt
+
 # PaperPilot specific
 uploads/
 downloads/
@@ -112,6 +114,8 @@ watermarked_files/
 *.docx
 *.doc
 *.txt
+
+!requirements.txt
 
 # API keys and secrets
 secrets/
