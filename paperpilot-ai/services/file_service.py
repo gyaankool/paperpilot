@@ -210,22 +210,51 @@ class FileService:
     def _extract_from_csv(self, file_path: str) -> str:
         """Extract text from CSV file"""
         try:
-            import pandas as pd
+            # Try pandas first, fallback to built-in csv module
+            try:
+                import pandas as pd
+                
+                df = pd.read_csv(file_path)
+                
+                # Convert to text representation
+                text = f"CSV Data Summary:\n"
+                text += f"Shape: {df.shape}\n"
+                text += f"Columns: {', '.join(df.columns)}\n\n"
+                text += f"First 5 rows:\n{df.head().to_string()}\n\n"
+                text += f"Data types:\n{df.dtypes.to_string()}\n"
+                
+                return text
+            except ImportError:
+                # Fallback to built-in csv module
+                import csv
+                
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    csv_reader = csv.reader(file)
+                    rows = list(csv_reader)
+                
+                if not rows:
+                    return "CSV file is empty"
+                
+                # Get header and first few rows
+                header = rows[0]
+                data_rows = rows[1:6]  # First 5 data rows
+                
+                text = f"CSV Data Summary:\n"
+                text += f"Rows: {len(rows)}\n"
+                text += f"Columns: {len(header)}\n"
+                text += f"Column names: {', '.join(header)}\n\n"
+                text += f"First 5 rows:\n"
+                
+                # Add header
+                text += f"{' | '.join(header)}\n"
+                text += f"{'-' * (len(' | '.join(header)))}\n"
+                
+                # Add data rows
+                for row in data_rows:
+                    text += f"{' | '.join(row)}\n"
+                
+                return text
             
-            df = pd.read_csv(file_path)
-            
-            # Convert to text representation
-            text = f"CSV Data Summary:\n"
-            text += f"Shape: {df.shape}\n"
-            text += f"Columns: {', '.join(df.columns)}\n\n"
-            text += f"First 5 rows:\n{df.head().to_string()}\n\n"
-            text += f"Data types:\n{df.dtypes.to_string()}\n"
-            
-            return text
-            
-        except ImportError:
-            logger.warning("pandas not installed, cannot extract CSV text")
-            return ""
         except Exception as e:
             logger.warning(f"CSV extraction failed: {str(e)}")
             return ""
