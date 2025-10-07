@@ -10,15 +10,15 @@ google-generativeai==0.3.2
 # File processing
 PyPDF2==3.0.1
 python-docx==0.8.11
-pandas==2.1.1
+pandas==2.2.0
 openpyxl==3.1.2
 
 # PDF generation (optional)
 reportlab==4.0.4
 
 # Data processing
-numpy==1.24.3
-scipy==1.11.3
+numpy==1.26.4
+scipy==1.13.1
 
 # HTTP requests
 requests==2.31.0
@@ -61,13 +61,13 @@ python-dateutil==2.8.2
 
 # Text processing
 nltk==3.8.1
-spacy==3.6.1
+spacy==3.7.2
 
 # LaTeX processing
 pylatex==1.4.2
 
 # Image processing (for future use)
-Pillow==10.0.0
+Pillow==10.4.0
 
 # API documentation
 flask-restx==1.1.0
@@ -76,5 +76,5 @@ flask-restx==1.1.0
 Flask-Limiter==3.5.0
 
 # Background tasks (for future use)
-celery==5.3.1
-redis==4.6.0
+celery==5.3.4
+redis==5.0.1
