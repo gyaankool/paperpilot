@@ -259,7 +259,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { usePaper } from "../contexts/PaperContext";
 import Header from "../components/Header";
 import apiService from "../services/api.js";
-import upload from "/assets/upload.png"
 import { FileText, Upload as UploadIcon, CheckCircle, AlertCircle, X, File, Clock, Zap } from "lucide-react";
 
 const UploadResearch = () => {
