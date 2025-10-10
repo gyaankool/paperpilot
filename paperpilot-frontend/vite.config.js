@@ -8,7 +8,12 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',
     port: process.env.PORT || 4173,
-    allowedHosts: 'all'
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'paperpilot-frontend.onrender.com',
+      '.onrender.com'
+    ]
   },
   server: {
     host: '0.0.0.0',
