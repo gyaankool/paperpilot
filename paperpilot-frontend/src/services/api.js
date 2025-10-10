@@ -1,6 +1,6 @@
 // API service for communicating with the PaperPilot backends
 const AUTH_API_BASE_URL = 'https://paperpilot-backend.onrender.com/api';  // Express backend for auth/SMTP
-const AI_API_BASE_URL = 'https://paperpilot-ai.onrender.com/api';    // Flask backend for AI services
+const AI_API_BASE_URL = 'https://paperpilot-ai-ih27.onrender.com/api';    // Flask backend for AI services
 
 class ApiService {
   constructor() {

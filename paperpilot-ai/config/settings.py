@@ -39,7 +39,9 @@ class Config:
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "https://paperpilot-frontend.onrender.com"  # Production frontend
+        "https://paperpilot-frontend.onrender.com",  # Production frontend
+        "https://paperpilot-ai-ih27.onrender.com",   # AI service
+        "https://paperpilot-backend.onrender.com"    # Backend service
     ]
     
     # Database Configuration (for future use)
